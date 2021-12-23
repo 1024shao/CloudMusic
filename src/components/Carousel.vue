@@ -22,6 +22,10 @@ export default {
     const state = reactive({
       bannerList: []
     })
+    // 获取轮播图数据
+    reqBanners().then(res => {
+      state.bannerList = res.data.banners
+    })
     onMounted(() => {
       const mySwiper = new Swiper('.swiper-container', {
         loop: true,
@@ -59,10 +63,6 @@ export default {
         mySwiper.pagination.init()
         mySwiper.pagination.bullets.eq(0).addClass('swiper-pagination-bullet-active');
       }
-      // 获取轮播图数据
-      reqBanners().then(res => {
-        state.bannerList = res.data.banners
-      })
     })
     return state
   }
